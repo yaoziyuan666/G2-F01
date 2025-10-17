@@ -18,7 +18,7 @@
 - `export/win/`：Windows 构建输出（.exe 等）  
   > 以 `.gitkeep` 占位，保证空目录被 Git 跟踪
 
-## 统一输入映射（将于 Day 1 的下一步设置）
+## 统一输入映射（已配置）
 - move_left（A / ←）
 - move_right（D / →）
 - move_up（W / ↑）
@@ -26,3 +26,7 @@
 - jump（Space）
 - pause（Esc）
 - interact（E）
+
+## 引擎环境（记录）
+- Godot：4.5（简体中文界面）
+- 渲染器：兼容性（Compatibility）
