@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://ingnjm6h8qkj"]
+
+[ext_resource type="Script" uid="uid://b3rk1gcwpby6x" path="res://scripts/main_hud.gd" id="1_wy6lw"]
+
+[node name="MainHud" type="CanvasLayer"]
+script = ExtResource("1_wy6lw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="FPS" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Version" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
