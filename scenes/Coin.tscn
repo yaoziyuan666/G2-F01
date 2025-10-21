@@ -1,0 +1,86 @@
+[gd_scene load_steps=14 format=3 uid="uid://jmoxipynifi1"]
+
+[ext_resource type="Script" uid="uid://bufnx7qc4tm0n" path="res://scripts/coin.gd" id="1_kyq3r"]
+[ext_resource type="Texture2D" uid="uid://ctur1norujt60" path="res://assets/sprites/coin/coin_16_strip4.png" id="1_owubc"]
+[ext_resource type="AudioStream" uid="uid://blk8hkgmoh8iw" path="res://assets/sfx/coin_pickup.wav" id="3_5twpi"]
+[ext_resource type="Texture2D" uid="uid://dhodpj6axkri8" path="res://assets/sprites/white_2x2.png" id="4_bedda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyq3r"]
+atlas = ExtResource("1_owubc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5twpi"]
+atlas = ExtResource("1_owubc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bedda"]
+atlas = ExtResource("1_owubc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2du1a"]
+atlas = ExtResource("1_owubc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i7s8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyq3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5twpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bedda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2du1a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r2og0"]
+radius = 5.0
+
+[sub_resource type="Gradient" id="Gradient_5twpi"]
+offsets = PackedFloat32Array(0, 0.99206346)
+colors = PackedColorArray(0.64795077, 0.51970536, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bedda"]
+gradient = SubResource("Gradient_5twpi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5twpi"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 170.0
+initial_velocity_max = 170.0
+color = Color(0.99999994, 0.9603651, 0.47002608, 1)
+color_ramp = SubResource("GradientTexture1D_bedda")
+
+[node name="Coin" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_kyq3r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i7s8r")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r2og0")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5twpi")
+volume_db = -6.0
+
+[node name="Burst" type="GPUParticles2D" parent="."]
+z_index = 10
+emitting = false
+amount = 20
+texture = ExtResource("4_bedda")
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5twpi")
